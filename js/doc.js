@@ -285,8 +285,9 @@ function razbor_(hodCard) {
                 let otvet_eto = const_masti[i][k + 1];
                 if (otvet_eto == undefined) {
                     let imeemKozur_cards = [];
-                    imeemKozur_cards = kompKards.filter(x => kozuri.includes(x)); // тут получаем наши козыря ..                   
-                    if (imeemKozur_cards.length == 0) { // если их нема то 
+                    imeemKozur_cards = kompKards.filter(x => kozuri.includes(x)); // тут получаем наши козыря ..      
+                    let er = hodCard.filter(x => kozuri.includes(x)); // фиксим баг с тем как бить козырь козырем)))  
+                    if (imeemKozur_cards.length == 0 || er.length > 0) { // если их нема то 
                         console.log('prinimau');
                         let temp_arr = kompKards.concat(op1);
                         op1 = [];
