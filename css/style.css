@@ -301,7 +301,8 @@ body {
 
 .massage {
 	display: block;
-	border-radius: 20px;
+	padding: 10px;
+	border-radius: 25px;
 	color: Olive;
 	text-align: center;
 	font-size: 3em;
