@@ -241,9 +241,9 @@ body {
 	box-shadow: 2px 0px 5px #000000A8, -2px 0px 3px #000000A8;
 }
 
-.card-front:hover {
+/* .card-front:hover {
 	z-index: 100;
-}
+} */
 
 .card_show {
 	z-index: 100;
