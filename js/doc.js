@@ -528,10 +528,12 @@ document.querySelector('.pole').onclick = () => {
 }
 
 function chel_prinyal() {
-    let temp_arr = playerKards.concat(op1);
-    op1 = [];
-    playerKards = temp_arr;
-    otboy_(null);// !!! playerKards
+    if (player_hod == false) {
+        let temp_arr = playerKards.concat(op1);
+        op1 = [];
+        playerKards = temp_arr;
+        otboy_(null);
+    }// !!! playerKards
 }
 //-------------------------chel_prinyal--------------------------------------------------
 
