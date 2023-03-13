@@ -193,17 +193,42 @@ function playerClick_refresh() {
                 console.log(op1);
                 verstka_();
                 razbor_(hodCard);
-                //player_hod = false;
-                //console.log('player_hod == true');
+                //player_hod = false; 
             } else {
-                let hodCard = playerKards.splice(i, 1,);
-                op1.push(hodCard[0]);
-                console.log(op1);
-                verstka_();
-                // player_hod = true;
-                console.log('player_hod == false');
-                podkinut_();
+                console.log('p r o ver it');
+                //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ КОНТРОЛЬ ПОБОЯ
+                let testingCard = [];// это карта, которой пробует бить человек
+                testingCard[0] = playerKards[i];
+                let rost_testingCard = 0, mast_testingCard = 0; good = false;
+                let rost_OP_Card = 0, mast_OP_Card = 0;
+                for (let a = 0; a < const_masti.length; a++) {
+                    for (let k = 0; k < const_masti[a].length; k++) {
+                        if (testingCard[0] == const_masti[a][k]) {// определим ранги бьющей карты
+                            rost_testingCard = k; mast_testingCard = a;
+                        }
+                        if (op1[op1.length - 1] == const_masti[a][k]) {// определим ранги побиваемой карты
+                            rost_OP_Card = k; mast_OP_Card = a;
+                        }
+                    }
+                }// Сравним ранги карт и назначим "good"
+                if (rost_testingCard > rost_OP_Card && mast_testingCard == mast_OP_Card) {
+                    good = true;
+                } else if (kozuri.includes(testingCard[0])) {
+                    good = true;
+                }
+
+                //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ КОНТРОЛЬ ПОБОЯ
+                if (good) {
+                    let hodCard = playerKards.splice(i, 1,);
+                    op1.push(hodCard[0]);
+                    console.log(op1);
+                    verstka_();
+                    // player_hod = true;
+                    console.log('player_hod == false');
+                    podkinut_();
+                }
             }
+
         }
     }
 }
@@ -431,17 +456,36 @@ function hod_kompa_() {
 
         for (let u = 0; u < kompKards.length; u++) {
             if (kompKards[u] == small[0]) {
-                console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 op1 = kompKards.splice(u, 1); // срезали младшую в Ход                 
             }
         }
         //-------        
         verstka_();
 
+
     } else if (player_hod == false) {
         // temp_cards = kompKards.filter(x => !kozuri.includes(x));
         temp_cards = kompKards;
-        
+
+        // for (let i = 0; i < const_masti.length; i++) {
+        //     for (let k = 0; k < const_masti[i].length; k++) {
+
+        //         // let podkinut = [];
+        //         // for (let u = 0; u <= 3; u++) {
+        //         //     if (const_masti[u][k] !== hodCard[0]) { podkinut.push(const_masti[u][k]); }
+        //         // }
+        //         // console.log('podkinut ' + podkinut);
+
+        //         // if (temp_cards.includes(const_masti[i][k])) {
+        //         //     temp_group.push(k);
+        //         //     console.log(temp_group);
+        //         //     //counter++;
+        //         // }
+        //     }
+        // }
+
+
         let small = []; let kk = 999; // выделить младшую карту
 
         for (let i = 0; i < const_masti.length; i++) {
@@ -515,7 +559,24 @@ function podkinut_() {
 
     } else if (false) {
         // temp_cards = kompKards.filter(x => !kozuri.includes(x));
-        temp_cards = kompKards;        
+        temp_cards = kompKards;
+
+        // for (let i = 0; i < const_masti.length; i++) {
+        //     for (let k = 0; k < const_masti[i].length; k++) {
+
+        //         // let podkinut = [];
+        //         // for (let u = 0; u <= 3; u++) {
+        //         //     if (const_masti[u][k] !== hodCard[0]) { podkinut.push(const_masti[u][k]); }
+        //         // }
+        //         // console.log('podkinut ' + podkinut);
+
+        //         // if (temp_cards.includes(const_masti[i][k])) {
+        //         //     temp_group.push(k);
+        //         //     console.log(temp_group);
+        //         //     //counter++;
+        //         // }
+        //     }
+        // }
     }
 
     verstka_();
@@ -536,6 +597,51 @@ function chel_prinyal() {
     }// !!! playerKards
 }
 //-------------------------chel_prinyal--------------------------------------------------
+
+//-------------------------INVERSE
+
+//-------------------------
+
+
+//============== M O B I L E ========================================
+
+// function t1() { this.classList.toggle('card_show') }
+
+// let chTouch = document.querySelectorAll('div.card-front');
+
+// for (let i = 0; i < chTouch.length; i++) { chTouch[i].ontouchend = t1 }
+
+
+
+
+
+
+
+//===============MOBILE========================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
