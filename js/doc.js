@@ -343,13 +343,57 @@ function razbor_(hodCard) {
                         }
                     }
                 }
+                //===+++++++++++++++++++++++++++++++++++++++++++
+                for (let a = 0; a < otvet.length; a++) {
+                    for (let b = 0; b < kompKards.length; b++) {
+                        if (shag_Flag == 0) {
+                            let imeemKozur_cards = [];
+                            imeemKozur_cards = kompKards.filter(x => kozuri.includes(x)); // тут получаем наши козыря ..      
+                            let er = hodCard.filter(x => kozuri.includes(x)); // фиксим баг с тем как бить козырь козырем)))  
+                            if (imeemKozur_cards.length == 0 || er.length > 0) { // если их нема то 
+                                console.log('prinimau');
+                                let temp_arr = kompKards.concat(op1);
+                                op1 = [];
+                                kompKards = temp_arr;
+                                console.log('kompKards4 = ' + kompKards);
+                                player_hod = true;
+                                console.log(player_hod);
+                                verstka_();
+                                otboy_(true);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                return;
+                            } else { // получим младший из доступных козырей
+                                let small = []; let kk = 999; // выделить младшую карту
+                                for (let i = 0; i < const_masti.length; i++) {
+                                    for (let k = 0; k < const_masti[i].length; k++) {
+                                        if (imeemKozur_cards.includes(const_masti[i][k])) {
+                                            if (k < kk) {
+                                                kk = k;
+                                                small[0] = const_masti[i][k]; // записали младшую в small[0]
+                                            }
+                                        }
+                                    }
+                                }
+                                for (let u = 0; u < kompKards.length; u++) {
+                                    if (kompKards[u] == small[0]) {
+                                        console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                        let temp = kompKards.splice(u, 1); // срезали младшую в Ход                
+                                        op1.push(temp[0]);
+                                        verstka_();
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                //===++++++++++++++++++++++++++++++++++++++++++
                 if (prinimau_flag == 0) {
                     console.log(prinimau_flag + ' prinimau_flag');
                     let temp_arr = kompKards.concat(op1);
                     op1 = [];
                     kompKards = temp_arr;
                     console.log('kompKards3 = ' + kompKards);
-                    //verstka_();
                     otboy_(true);// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                 }
@@ -466,9 +510,6 @@ function podkinut_() {
         let prostue_cards = kompKards.filter(x => !kozuri.includes(x)); // выделить простые .карты. 
         let realDostup_cards = prostue_cards.filter(x => podkinut.includes(x)); // получили реально доступные .карты.
 
-
-
-
         let small = []; let kk = 999; // выделить младшую карту
 
         for (let i = 0; i < const_masti.length; i++) {
@@ -491,10 +532,6 @@ function podkinut_() {
         }
 
         console.log('p o d k i n u t ' + small);
-
-
-
-
 
     } else if (false) {
         // temp_cards = kompKards.filter(x => !kozuri.includes(x));
