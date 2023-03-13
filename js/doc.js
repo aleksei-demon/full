@@ -237,7 +237,6 @@ function playerClick_refresh() {
                 } else if (kozuri.includes(testingCard[0])) {
                     good = true;
                 }
-
                 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ КОНТРОЛЬ ПОБОЯ
                 if (good) {
                     let hodCard = playerKards.splice(i, 1,);
@@ -299,14 +298,13 @@ function otboy_(comp_prinyal = false) { //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         showMassage_('О т б о й !', 2000);
         hod_kompa_();
     }
-    if (player_hod == false) { hod_kompa_(); }// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (player_hod == false) { hod_kompa_(); }// !!!!!!!!!!!!
 
     verstka_();
-
 }
 
 document.querySelector('.compzone').onclick = () => {
-    otboy_(); //!!!!!!!!!!!!!!добавить проверки на правомочность
+    if (op1.length % 2 == 0) { otboy_(); }
 }
 
 //--------------------------------------otboy-------------------------------------------
