@@ -188,12 +188,33 @@ function playerClick_refresh() {
         playerClickCards[i].onclick = () => {
             console.log(player_hod);
             if (player_hod == true) { // !!!
-                let hodCard = playerKards.splice(i, 1,);
-                op1.push(hodCard[0]);
-                console.log(op1);
-                verstka_();
-                razbor_(hodCard);
-                //player_hod = false; 
+                //===================================================================== КОНТРОЛЬ ПОДКИДА
+                let podki_hodCard = [];// это карта, которую пробует подкинуть человек
+                podki_hodCard[0] = playerKards[i];
+                let good = false;
+                let mozhno_podkinut = [];
+                for (let i = 0; i < const_masti.length; i++) {
+                    for (let k = 0; k < const_masti[i].length; k++) {
+                        for (let a = 0; a < op1.length; a++) {
+                            if (op1[a] == const_masti[i][k]) {
+                                //=====перебрали const_masti и получили место op1[a] в const_masti.
+                                for (let u = 0; u <= 3; u++) {
+                                    if (const_masti[u][k] !== op1[a]) { mozhno_podkinut.push(const_masti[u][k]); }
+                                }
+                            }
+                        }
+                    }
+                } // выше мы получили карты что можно было бы подкинуть   
+                console.log('mozhno_podkinut ' + mozhno_podkinut);
+                if (mozhno_podkinut.includes(podki_hodCard[0])) { good = true; }
+                //===================================================================== КОНТРОЛЬ ПОДКИДА
+                if (op1.length < 1 || good) {
+                    let hodCard = playerKards.splice(i, 1,);
+                    op1.push(hodCard[0]);
+                    console.log('podki hod');
+                    verstka_();
+                    razbor_(hodCard);
+                }
             } else {
                 console.log('p r o ver it');
                 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ КОНТРОЛЬ ПОБОЯ
@@ -399,8 +420,8 @@ function razbor_(hodCard) {
                                 }
                                 for (let u = 0; u < kompKards.length; u++) {
                                     if (kompKards[u] == small[0]) {
-                                        console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                        let temp = kompKards.splice(u, 1); // срезали младшую в Ход                
+                                        console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!
+                                        let temp = kompKards.splice(u, 1); // срезали младшую в Ход 
                                         op1.push(temp[0]);
                                         verstka_();
                                         return;
@@ -410,7 +431,6 @@ function razbor_(hodCard) {
                         }
                     }
                 }
-
                 //===++++++++++++++++++++++++++++++++++++++++++
                 if (prinimau_flag == 0) {
                     console.log(prinimau_flag + ' prinimau_flag');
@@ -431,8 +451,7 @@ function razbor_(hodCard) {
 //-------------------------------------- H O D   K O M P A ----------------------------------
 
 function hod_kompa_() {
-    let temp_cards = [],
-        temp_group = [];
+    let temp_cards = [];
 
     if (koloda_v_igre.length > 10 && player_hod == false) {//
 
@@ -456,36 +475,15 @@ function hod_kompa_() {
 
         for (let u = 0; u < kompKards.length; u++) {
             if (kompKards[u] == small[0]) {
-                console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                op1 = kompKards.splice(u, 1); // срезали младшую в Ход                 
+                console.log(small + ' ..small');// !!!!!!!!!!!!!!!!
+                op1 = kompKards.splice(u, 1); // срезали младшую в Ход  
             }
         }
-        //-------        
+
         verstka_();
 
-
     } else if (player_hod == false) {
-        // temp_cards = kompKards.filter(x => !kozuri.includes(x));
         temp_cards = kompKards;
-
-        // for (let i = 0; i < const_masti.length; i++) {
-        //     for (let k = 0; k < const_masti[i].length; k++) {
-
-        //         // let podkinut = [];
-        //         // for (let u = 0; u <= 3; u++) {
-        //         //     if (const_masti[u][k] !== hodCard[0]) { podkinut.push(const_masti[u][k]); }
-        //         // }
-        //         // console.log('podkinut ' + podkinut);
-
-        //         // if (temp_cards.includes(const_masti[i][k])) {
-        //         //     temp_group.push(k);
-        //         //     console.log(temp_group);
-        //         //     //counter++;
-        //         // }
-        //     }
-        // }
-
-
         let small = []; let kk = 999; // выделить младшую карту
 
         for (let i = 0; i < const_masti.length; i++) {
@@ -501,18 +499,15 @@ function hod_kompa_() {
 
         for (let u = 0; u < kompKards.length; u++) {
             if (kompKards[u] == small[0]) {
-                console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                op1 = kompKards.splice(u, 1); // срезали младшую в Ход                
+                console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                op1 = kompKards.splice(u, 1); // срезали младшую в Ход 
             }
         }
-
         verstka_();
     }
     player_hod == true;
-
-    //kompKards
 }
-//hod_kompa_();
+
 //-----------------------------------------hod kompa-----------------------------------------
 
 //---------------- p o d k i n u t -------------------------------------------- p o d k i n u t ---------------
@@ -554,31 +549,9 @@ function podkinut_() {
                 op1.push(temp[0]);
             }
         }
-
         console.log('p o d k i n u t ' + small);
 
-    } else if (false) {
-        // temp_cards = kompKards.filter(x => !kozuri.includes(x));
-        temp_cards = kompKards;
-
-        // for (let i = 0; i < const_masti.length; i++) {
-        //     for (let k = 0; k < const_masti[i].length; k++) {
-
-        //         // let podkinut = [];
-        //         // for (let u = 0; u <= 3; u++) {
-        //         //     if (const_masti[u][k] !== hodCard[0]) { podkinut.push(const_masti[u][k]); }
-        //         // }
-        //         // console.log('podkinut ' + podkinut);
-
-        //         // if (temp_cards.includes(const_masti[i][k])) {
-        //         //     temp_group.push(k);
-        //         //     console.log(temp_group);
-        //         //     //counter++;
-        //         // }
-        //     }
-        // }
     }
-
     verstka_();
 }
 //---------------podkinut-------------------------------podkinut-------------------------------------------
@@ -598,53 +571,8 @@ function chel_prinyal() {
 }
 //-------------------------chel_prinyal--------------------------------------------------
 
-//-------------------------INVERSE
-
-//-------------------------
-
-
-//============== M O B I L E ========================================
-
-// function t1() { this.classList.toggle('card_show') }
-
-// let chTouch = document.querySelectorAll('div.card-front');
-
-// for (let i = 0; i < chTouch.length; i++) { chTouch[i].ontouchend = t1 }
 
 
 
 
 
-
-
-//===============MOBILE========================================
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //
