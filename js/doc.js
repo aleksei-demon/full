@@ -260,8 +260,8 @@ playerClick_refresh();
 
 function otboy_(comp_prinyal = false) { //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    if (kompKards.length == 0) { showMassage_('Ты проиграл !', 12000); return } // победа компа 
-    if (playerKards.length == 0) { showMassage_('Ты победил !', 12000); return } // победа человека 
+    if (kompKards.length == 0 && koloda_v_igre.length == 0) { showMassage_('Ты проиграл !', 12000); return } // победа компа 
+    if (playerKards.length == 0 && koloda_v_igre.length == 0) { showMassage_('Ты победил !', 12000); return } // победа человека 
 
     op1 = [];
     if (player_hod == true && koloda_v_igre.length > 0) {
