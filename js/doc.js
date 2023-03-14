@@ -560,7 +560,7 @@ document.querySelector('.pole').onclick = () => {
 }
 
 function chel_prinyal() {
-    if (player_hod == false) {
+    if (player_hod == false && op1.length % 2 == 1) {
         let temp_arr = playerKards.concat(op1);
         op1 = [];
         playerKards = temp_arr;
