@@ -260,6 +260,7 @@ playerClick_refresh();
 
 function otboy_(comp_prinyal = false) { //!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+    if (playerKards.length == 0 && kompKards.length == 0 && koloda_v_igre.length == 0) { showMassage_('Ничья !', 12000); return } // ничья
     if (kompKards.length == 0 && koloda_v_igre.length == 0) { showMassage_('Ты проиграл !', 12000); return } // победа компа 
     if (playerKards.length == 0 && koloda_v_igre.length == 0) { showMassage_('Ты победил !', 12000); return } // победа человека 
 
@@ -355,7 +356,7 @@ function razbor_(hodCard) {
                         }
                         for (let u = 0; u < kompKards.length; u++) {
                             if (kompKards[u] == small[0]) {
-                                console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                console.log(small + ' ..small');// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                 let temp = kompKards.splice(u, 1); // срезали младшую в Ход                
                                 op1.push(temp[0]);
                                 verstka_();
